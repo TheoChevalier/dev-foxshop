@@ -1,0 +1,611 @@
+/* This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+
+@import url(newItem.css);
+
+@font-face {
+  font-family: 'MozTTLight';
+  src: url(fonts/MozTT%20Light.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: 'MozTT';
+  src: url(fonts/MozTT%20Regular.ttf) format("truetype");
+}
+
+header,footer {
+  width: 100%;
+}
+
+header {top: 0;}
+footer {bottom: 0;}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  height: 100%;
+  font-family: "MozTTLight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333333;
+  width: 100%;
+  margin: 0 auto;
+}
+
+section[role="region"], form[role="dialog"] {
+  min-width: 100%;
+  min-height: 100%;
+  display: none;
+}
+
+#lists {display: block;}
+
+:target {
+  display: block!important;
+}
+
+#status {display: none;z-index: 6;}
+
+#install {display: none!important;}
+
+#lists {
+  z-index: 6;
+  min-width: 100%;
+  opacity: 1;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  padding: 18px 20px 18px 10px;
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.list li:last-child {
+  border-bottom: none;
+}
+.list li a {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.liTitle {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.number {
+  float:right;
+  display: block;
+  width: 10%;
+  min-width: 60px;
+  padding: 18px 0;
+}
+.listElmTitle {display: inline-block;position: relative;}
+
+.done {
+  opacity: 0.5;
+  background: #efefef;
+}
+
+.done a p:first-child {
+  text-decoration: line-through;
+}
+
+/* Margin for total*/
+.list p a:first-child {
+  margin-right: 1rem;
+}
+.list p a:nth-child(2) {
+  margin-right: 1rem;
+}
+
+#scan {
+  width: 40px!important;
+  min-width: 40px;
+  padding: 0;
+  margin-top: 0!important;
+  background: url(../img/icons/scan.png)  no-repeat 50% 50% / 3rem auto;
+  border-radius: 0;
+}
+#itemName {
+  width: -webkit-calc(100% - 85px);
+  width: calc(100% - 85px);
+  background: url("building_blocks/input_areas/images/ui/separator.png") no-repeat scroll 0px 50% / auto 100% transparent;
+}
+
+#itemName.noScan {
+  width: -webkit-calc(100% - 45px);
+  width: calc(100% - 45px);
+}
+
+#itemName, #listName {
+  line-height: 2.5rem;
+}
+
+form[role="search"] p {
+  padding: 0;
+}
+
+#itemName, #scan, #NIF-open {
+  float: left;
+}
+
+#add-item {
+  display: inline-block;
+}
+
+#image {display: none;}
+
+#saveList, #newListName {
+  display: none;
+}
+
+#resetItems {
+  right: 40px;
+}
+
+#resetEmail {
+  top: 1rem;
+}
+
+*[role="region"], *[role="dialog"] {
+  padding: 5rem 0;
+}
+
+
+#todo-count span {
+  font-weight: bold;
+}
+
+.pack-end {
+  background: url('../img/icons/go.png') no-repeat;
+  width: 16px;
+  height: 16px;
+  z-index: 7;
+}
+.list{
+  position: relative;
+  z-index: 1;
+  padding: 0!important;
+  overflow: hidden;
+}
+
+/* category header */
+.list header h2 {
+  border-bottom: none!important;
+  padding: 0!important;
+  color: #ff4E00!important;
+}
+
+.list li {
+  padding: 0 2rem;
+  pointer-events: none;
+}
+
+span {
+  pointer-events: auto!important;
+}
+
+.liTitle {
+  pointer-events: auto;
+  margin-left: 3rem;
+}
+.labelItem {
+  margin-left: -3.5rem;
+}
+
+#list-status h2 {
+  font-size: 1.4rem;
+  border-bottom: none;
+  border-top: 0.1rem solid rgb(230, 230, 230);
+  padding: 0.8rem 1.5rem;
+}
+
+#aboutPanel p {
+  width: -webkit-calc(100% - 6rem);
+  width: calc(100% - 6rem);
+  margin: 2rem auto;
+  font-size: 1.6rem;
+  text-align: justify;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+
+/* !important ALL THE THINGS! Ewk. */
+.icon-settings {
+  background: url("../img/icons/gear.png") no-repeat 50% 50% / 3rem auto!important;
+}
+
+.icon-install {
+  background: url('../img/icons/install.png') no-repeat 50% 50% / 3rem auto!important;
+}
+
+.icon-complete {
+  background: url('../img/icons/complete.png') no-repeat 50% 50% / 3rem auto!important;
+}
+
+.icon-more {
+  background: url("../img/icons/ellipsis.png") no-repeat 50% 50% / 3rem auto!important;
+}
+
+.icon-edit {
+  background: url("../img/icons/edit.png") no-repeat 50% 50% / 3rem auto!important;
+}
+
+.pack-icon-send {
+  background: url("../img/icons/share.png") no-repeat 50% 50% / 3rem auto !important;
+}
+
+.icon-delete {
+  background: url("../img/icons/delete.png") no-repeat 50% 50% / 3rem auto !important;}
+
+
+[role="toolbar"] button:active,
+#newItemForm .button:active {
+    background-color: rgb(0, 138, 170)!important;
+}
+
+/******************************************************************************
+ * CSS animations
+ */
+ /* Animated translation for status box notification */
+ #status {z-index: 100;}
+.slideIn {
+  bottom: -50px;
+  animation: slideIn .4s ease-in-out 0s;
+}
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+.slideOut {
+  animation: slideOut .4s ease-in-out 0s;
+}
+@keyframes slideOut {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(50px);
+  }
+}
+
+/* Launch Value Selector */
+animation: fadeIn 0.2s forwards;
+@keyframes fadeIn {
+0% { opacity: 0; }
+100% { opacity: 1; }
+}
+ 
+/* Close Value Selector */
+animation: fadeOut 0.2s forwards;
+@keyframes fadeOut {
+0% { opacity: 1; }
+100% { opacity: 0; }
+}
+
+
+/******************************************************************************
+ * Setting icons
+ */
+
+.menu-item {
+  padding-left: 5.5rem!important;
+  background-repeat: no-repeat;
+  background-position: 1.4rem center;
+}
+
+.menu-item-desc {
+  left: 5.5rem;
+}
+
+.menu-item::before {
+  position: absolute;
+  top: calc((6.2rem - 3.2rem) / 2);
+  top: -webkit-calc((6.2rem - 3.2rem) / 2);
+  left: calc((5.5rem - 2.8rem) / 2);
+  left: -webkit-calc((5.5rem - 2.8rem) / 2);
+  width: 3rem;
+  height: 3rem;
+  content: '';
+  background-image: url(../img/icons/60.png);
+  background-size: 3rem;
+}
+
+/******************************************************************************
+ *   New Item Form overrides
+ */
+
+#newItemForm fieldset section {
+  margin-left: 0;
+  margin-right: 9.2rem;
+  border-left: none;
+  border-right: 0.1rem solid rgb(221, 221, 221);
+  border-radius: 0px 0.3rem 0.3rem 0px;
+}
+
+#newItemForm .button {
+  width: 20%;
+  height: 100%;
+  margin: 0;
+  display: inline-block;
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+
+#NIF-open {
+  font-size: 2.5rem;
+  width: 45px;
+  min-width: 45px;
+}
+
+#NIF-qty {
+  width: 60%;
+  display: inline-block;
+  text-align: center;
+}
+
+fieldset {
+  font-size: 1.8rem;
+}
+
+#NIF-container {
+  padding: .5rem 2rem;
+  list-style: none;
+}
+
+/* Selects */
+#newItemForm .fake-select {
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+
+#newItemForm select {
+  left: 0;
+  background: url("building_blocks/input_areas/images/icons/arrow.png") no-repeat scroll 100% 100% / 1.2rem auto transparent;
+  -moz-box-sizing: border-box;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: rgb(51, 51, 51);
+  line-height: 4rem;
+  text-transform: uppercase;
+  outline: 0!important;
+}
+
+#NIF-unit-p {
+  position: absolute!important;
+  width: 9.2rem!important;
+  right: 0!important;
+  height: 100%!important;
+  border: none;
+  padding: 0!important;
+}
+
+#NIF-unit-button {
+  height:  100%;
+}
+
+#NIF-unit {
+  width: 100%!important;
+  height: 100%!important;
+  top: 0!important;
+}
+
+#NIF-category {
+  display: block;
+  width: 100%;
+  height: 4rem;
+  resize: none;
+  padding: 1rem  1.2rem 0px 1.2rem;
+  border: 0.1rem solid rgb(204, 204, 204);
+  border-radius: 0.3rem;
+  box-shadow: none;
+}
+
+/******************************************************************************
+ *   Edit mode overrides
+ */
+form[data-type="edit"] > header:first-child h1 {
+  line-height: 4.8rem;
+  font-weight: 400!important;
+}
+
+form[data-type="edit"] ul header {
+  padding: 0.5rem 1rem!important;
+  margin: 0!important;
+  font-size: 10px!important;
+  color: #424242!important;
+  text-transform: uppercase;
+  height: auto!important;
+  background: none!important;
+  border-bottom: 0.1rem solid #ff4e00!important;
+}
+form[data-type="edit"] ul header h2 {
+  padding: 0!important;
+  margin: 0!important;
+  font-size: 1.5rem!important;
+  line-height: 1.8rem!important;
+  font-weight: 400!important;
+}
+/******************************************************************************
+ *   Building blocks overrides
+ */
+
+/* Scroll on panels*/
+
+section[role="region"] > header:first-child,
+form[role="dialog"] > header:first-child,
+form[role="dialog"] > menu {
+   position: fixed!important;
+}
+
+menu {z-index: 5;}
+
+form[role="dialog"][data-type="edit"] {
+    position: static!important;
+}
+
+
+
+/* Allow events on clear button*/
+form p input + button[type="reset"], form p textarea + button[type="reset"] {
+  pointer-events: auto;
+}
+
+form[role="dialog"][data-type="confirm"] > section {
+  font-size: 1.5rem;
+}
+
+form[role="search"] button {
+  width: auto;
+}
+
+form[role="dialog"][data-type="confirm"] {
+  padding: 0;
+}
+
+/* input_form.css */
+form[role="search"] p input, form[role="search"] p textarea {
+  height: 3.5rem!important;
+  padding: 0.5rem 0px 0px 1rem;
+}
+
+form[role="search"]:after, form[role="search"]:before {
+  background: none!important;
+}
+
+/*switches.css*/
+label:not([for]) input + span {
+  pointer-events: auto;
+}
+
+
+/* fix webkit in lists.css */
+[data-type="list"] li > label {
+  left: 0;
+  width: 5rem;
+  height: 6rem;
+  border-top: none;
+  pointer-events: auto;
+}
+
+[data-type="list"] li > label:active {
+  background-color: #b2f2ff;
+}
+
+[data-type="list"] li > label input + span {
+  left: 50%;
+  margin-left: -1.1rem;
+  pointer-events: none;
+}
+
+.settings ul li button,
+.settings ul li a[role="button"] {
+  width: -webkit-calc(100% - 6rem);
+}
+
+.settings ul li > small {
+  padding-top: 1rem!important;
+}
+
+
+/* fix webkit in lists.css */
+form[role="dialog"][data-type="action"] > menu > button,
+form[role="dialog"][data-type="object"] > menu > button {
+  width: -webkit-calc(100% - 3rem);
+}
+
+
+/* fix webkit in confirm.css */
+form[role="dialog"][data-type="confirm"] > section {
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+form[role="dialog"][data-type="confirm"] menu button {
+  width: -webkit-calc((100% - 1rem) / 2);
+}
+
+
+/* fix webkit in input_form.css */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+input[type="number"],
+textarea {
+  font-family: "MozTTLight";
+}
+
+
+/* fix webkit in edit_mode.css */
+form[role="dialog"][data-type="edit"] menu button {
+  width: -webkit-calc((100% - 1rem) / 2);
+}
+
+
+/* fix radio buttons in editCurrency*/
+form a {
+  color: white!important;
+}
+
+form ul li:last-child {
+  border-bottom: none;
+}
+
+/******************************************************************************
+ * Fake select boxes
+ * Hum. Fix later :)
+ */
+.fake-select {
+  position: relative!important;
+  display: block!important;
+  padding: 1.1rem 3rem!important;
+  margin: 0!important;
+  height: 3.8rem!important;
+}
+
+.fake-select.small {
+  display: inline-block!important;
+  vertical-align: top!important;
+}
+
+.fake-select > button {
+  display: block!important;
+  top: 0!important;
+  left: 0!important;
+  width: 100%!important;
+}
+
+.fake-select > select {
+  top: 1.1rem!important;
+  height: 3.8rem!important;
+}
+
+/* */
+section[role="region"] > ul > li > p + .fake-select {
+  padding-top: 1.1rem!important;
+  margin-top: -0.8rem!important;
+}
+

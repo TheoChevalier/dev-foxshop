@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html manifest="cache.appcache">
+<head>
+  <meta charset="utf-8">
+  <title data-l10n-id="app-name">FoxShop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <link rel="apple-touch-icon" href="img/icons/128.png"/>
+
+    <!-- Building blocks -->
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/headers.css"/>
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/lists.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/switches.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/toolbars.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/edit_mode.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/input_areas.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/action_menu.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/confirm.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/buttons.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/progress_activity.css">
+  <link rel="stylesheet" type="text/css" href="css/building_blocks/status.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/app.css"/>
+  <link rel="stylesheet" href="css/lists.css"/>
+
+  <!-- l10n resources -->
+  <link rel="prefetch" type="application/l10n" href="locales/data" />
+  <script type="text/javascript" src="webL10n/l10n.js"></script>
+</head>
+
+<body>
+  <div id="content">
+
+
+    <section role="region" id="lists">
+      <header>
+        <menu type="toolbar">
+          <button id="install" style="display:none;" data-l10n-id="install">Install</button>
+        </menu>
+        <h1 id="title" data-l10n-id="app-name">FoxShop</h1>
+      </header>
+        <form role="search" id="form-list" onsubmit="return false;">
+          <button type="submit" id="add-list" data-l10n-id="add-list">Add</button>
+          <p>
+            <textarea id="listName" data-l10n-id="listName" placeholder="New list name"></textarea>
+            <button type="reset">reset</button>
+          </p>
+        </form>
+        <ul data-type="list" class="list"></ul>
+      <div role="toolbar">
+        <ul>
+          <li><button class="icon-settings">Settings</button></li>
+        </ul>
+        <ul>
+          <li><button class="edit icon-delete">Edit</button></li>
+          <li><button class="icon-more">More</button></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <form role="dialog" data-type="edit" onsubmit="return false;" id="editMode">
+      <header>
+        <button><span class="icon icon-close">close</span></button>
+        <menu type="toolbar">
+          <button data-l10n-id="delete-list">Delete</button>
+        </menu>
+        <h1 data-l10n-id="edit-list">Edit Mode</h1>
+      </header>
+        <ul data-type="list" class="list">
+        </ul>
+      <menu>
+        <button data-l10n-id="deselect-all">Deselect all</button>
+        <button data-l10n-id="select-all">Select all</button>
+      </menu>
+    </form>
+
+
+    <section id="items" role="region">
+      <header>
+        <button class="back"><span class="icon icon-back"></span></button>
+        <menu type="toolbar">
+          <button id="editList"><span class="icon icon-edit">Edit</span></button>
+          <button id="saveList"><span data-l10n-id="done">Done</span></button>
+        </menu>
+        <form action="#" id="newListName">
+          <input placeholder="New name" required="required" type="text" data-l10n-id="new-list-name">
+          <button type="reset"></button>
+        </form>
+        <h1 class="title" data-l10n-id="items">Items</h1>
+      </header>
+      <form role="search" id="form-item" onsubmit="return false;">
+        <button type="submit" id="add-item" data-l10n-id="add-item">Add</button>
+        <p>
+          <button type="submit" id="scan"></button>
+          <textarea id="itemName" data-l10n-id="item-name" placeholder="Name"></textarea>
+          <button type="reset" id="resetItems">reset</button>
+          <button type="submit" id="NIF-open">+</button>
+        </p>
+      </form>
+      <img src="" id="image" />
+      <ul class="list" data-type="list">
+      </ul>
+      <header id="list-status">
+        <h2>
+          <span id="list-total" data-l10n-id="total-list">Total:</span><br>
+          <span id="list-remaining" data-l10n-id="remaining-list">Remaining:</span>
+        </h2>
+      </header>
+      <div role="toolbar">
+        <ul>
+          <li><button class="icon-settings"></button></li>
+        </ul>
+        <ul>
+          <li><button class="send pack-icon-send">Send</button></li>
+          <li><button class="edit icon-delete">Edit</button></li>
+          <li><button class="icon-more">More</button></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <section id="newItemForm" class="view-edit-contact" role="region">
+      <header>
+        <button id="NIF-close"><span class="icon icon-close">close</span></button>
+        <menu type="toolbar"><button id="NIF-done"><span data-l10n-id="done">Done</span></button></menu>
+        <h1 class="title" data-l10n-id="NIF-title">New item</h1>
+      </header>
+      <form id="NIF-container" onsubmit="return false;">
+      <li>
+      <section class="item first">
+        <a id="thumbnail-action" class="item-media fillflow-media pull-right" style="display:none">
+          <p>
+            <span role="button" class="icon-addimage"></span>
+            <em data-l10n-id="add-picture">Add picture</em>
+          </p>
+          <p class="edit-photo">
+            <em data-l10n-id="edit-picture">Edit</em>
+          </p>
+          <img id="NIF-photo" alt=""/>
+        </a>
+        <!--<input type="file" id="input-photo" name"photo"/>-->
+        <div class="item-body-exp">
+          <p class="fillflow-row">
+            <input id="NIF-name" class="textfield" data-l10n-id="NIF-name" placeholder="Name" type="text">
+            <button type="reset">Clear</button>
+          </p>
+          <p class="fillflow-row fake-select">
+            <button id="NIF-category-button" class="icon icon-dialog" data-l10n-id="NIF-category-button">Category</button>
+            <select id="NIF-category" name="NIF-category" class="action textfield">
+              <option value="other"      data-l10n-id="NIF-other">Other</option>
+              <option value="drinks"     data-l10n-id="NIF-drinks">Drinks</option>
+              <option value="fruits"     data-l10n-id="NIF-fruits">Fruits</option>
+              <option value="vegetables" data-l10n-id="NIF-vegetables">Vegetables</option>
+              <option value="fishery"    data-l10n-id="NIF-fishery">Fishery</option>
+              <option value="butchery"   data-l10n-id="NIF-butchery">Butchery</option>
+              <option value="grocery"    data-l10n-id="NIF-grocery">Grocery</option>
+              <option value="frozen"     data-l10n-id="NIF-frozen">Frozen</option>
+              <option value="hygiene"    data-l10n-id="NIF-hygiene">Hygiene</option>
+              <option value="textile"    data-l10n-id="NIF-textile">Textile</option>
+              <option value="house"      data-l10n-id="NIF-house">House</option>
+              <option value="garden"     data-l10n-id="NIF-garden">Gardening</option>
+              <option value="animal"     data-l10n-id="NIF-animal">Animal</option>
+              <option value="multimedia" data-l10n-id="NIF-multimedia">Multimedia</option>
+            </select>
+          </p>
+        </div>
+
+        <fieldset class="fillflow-row">
+          <p id="NIF-unit-p" class="fake-select">
+            <button id="NIF-unit-button" class="icon icon-dialog" data-l10n-id="NIF-piece2[zero]">Piece</button>
+            <select id="NIF-unit" name="NIF-unit" class="action">
+              <option value="piece"  data-l10n-id="NIF-piece2" data-l10n-args='{"n":"0"}'>Piece</option>
+              <option value="bag"    data-l10n-id="NIF-bag2" data-l10n-args='{"n":"0"}'>Bag</option>
+              <option value="bottle" data-l10n-id="NIF-bottle2" data-l10n-args='{"n":"0"}'>Bottle</option>
+              <option value="box"    data-l10n-id="NIF-box2" data-l10n-args='{"n":"0"}'>Box</option>
+              <option value="case"   data-l10n-id="NIF-case2" data-l10n-args='{"n":"0"}'>Case</option>
+              <option value="gallon" data-l10n-id="NIF-gallon2" data-l10n-args='{"n":"0"}'>Gallon</option>
+              <option value="g"      data-l10n-id="NIF-g2" data-l10n-args='{"n":"0"}'>g</option>
+              <option value="kg"     data-l10n-id="NIF-kg2" data-l10n-args='{"n":"0"}'>Kg</option>
+            </select>
+          </p>
+          <section>
+            <p class="setbox-item">
+              <button id="NIF-less" class="button">-</button><input id="NIF-qty" type="number" class="textfield" value="1" /><button type="reset">Clear</button><button id="NIF-plus" class="button">+</button>
+            </p>
+            <p class="setbox-item">
+              <input id="NIF-price" type="number" class="textfield" data-l10n-id="NIF-price" placeholder="$ by…"/>
+              <button type="reset">Clear</button>
+            </p>
+          </section>
+        </fieldset>
+
+        <p class="fillflow-row">
+          <input id="NIF-note" data-l10n-id="NIF-note" placeholder="Note" class="textfield" type="text">
+          <button type="reset">Clear</button>
+        </p>
+        </section>
+      </li>
+      <button id="NIF-delete" class="danger" data-l10n-id="delete">Delete</button>
+      </form>
+    </section>
+
+    <form role="dialog" data-type="confirm" id="deleteItem" onsubmit="return false;">
+    <section>
+      <h1 data-l10n-id="confirmation">Confirmation</h1>
+      <p>
+        <span data-l10n-id="delete-item-desc">Are you sure you want to delete this item?</span>
+      </p>
+    </section>
+    <menu>
+      <button class="cancel" data-l10n-id="cancel">Cancel</button>
+      <button role="button" class="danger" data-l10n-id="delete">Delete</button>
+    </menu>
+    </form>
+
+
+    <form role="dialog" data-type="confirm" id="enterEmail" onsubmit="return false;">
+    <section>
+      <h1 data-l10n-id="send-title">Send this list</h1>
+      <p>
+        <span data-l10n-id="send-desc">To send this list to another person, please provide his email:</span>
+        <p style="text-align: center">
+          <input type="email" id="email" data-l10n-id="email" placeholder="Email">
+          <button type="reset" id="resetEmail">reset</button>
+        </p>
+      </p>
+    </section>
+    <menu>
+      <button class="cancel" data-l10n-id="cancel">Cancel</button>
+      <button role="button" class="recommend send" data-l10n-id="send">Send</button>
+    </menu>
+    </form>
+
+
+    <form id="sendEmail" role="dialog" data-type="confirm" onsubmit="return false;">
+    <section>
+    <h1 data-l10n-id="sending-title">Sending…</h1>
+    <p style="text-align: center">
+      <progress></progress>
+    </p>
+    </section>
+    <menu>
+      <button class="full cancel" data-l10n-id="cancel">Cancel</button>
+    </menu>
+    </form>
+
+
+
+    <form id="moreLists" role="dialog" data-type="action" onsubmit="return false;">
+      <header data-l10n-id="more-actions">More actions</header>
+      <menu>
+        <button id="removeDoneLists" data-l10n-id="delete-completed-lists">Delete completed lists</button>
+        <button id="checkLists" data-l10n-id="check-lists">Cross out all lists</button>
+        <button id="uncheckLists" data-l10n-id="uncheck-lists">Uncross all lists</button>
+        <button class="cancel" data-l10n-id="cancel">Cancel</button>
+      </menu>
+    </form>
+
+    <form id="moreItems" role="dialog" data-type="action" onsubmit="return false;">
+      <header data-l10n-id="more-actions">More actions</header>
+      <menu>
+        <button id="cloneList" data-l10n-id="clone-list">Clone this list</button>
+        <button id="removeDoneItems" data-l10n-id="delete-completed-items">Delete completed items</button>
+        <button id="checkItems" data-l10n-id="check-items">Cross out all items</button>
+        <button id="uncheckItems" data-l10n-id="uncheck-items">Uncross all items</button>
+        <button class="cancel" data-l10n-id="cancel">Cancel</button>
+      </menu>
+    </form>
+
+    <section role="region" class="skin-organic settings" id="settingsPanel">
+    <header>
+      <a><span class="icon icon-back">back</span></a>
+      <h1 data-l10n-id="settings-title">Settings</h1>
+    </header>
+    <header>
+      <h2 data-l10n-id="language">Language</h2>
+    </header>
+      <ul>
+        <li>
+          <p class="fake-select">
+            <button id="language" class="icon icon-dialog">Language</button>
+            <select id="language-select" name="language">
+              <option value="en-US">English</option>
+              <option value="es-ES">Español</option>
+              <option value="fr">Français</option>
+              <option value="pl">Polski</option>
+              <option value="pt-BR">Português do Brasil</option>
+            </select>
+          </p>
+        </li>
+      </ul>
+    <header>
+      <h2 data-l10n-id="customize">Customize</h2>
+    </header>
+      <ul>
+        <li>
+          <label>
+            <input type="checkbox" data-type="switch" id="prices" />
+            <span></span>
+          </label>
+          <a data-l10n-id="prices-enable">Enable prices</a>
+        </li>
+        <li>
+          <button id="currency" disabled="" data-l10n-id="choose-currency">Choose your currency</button>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" data-type="switch" id="scanEnable" />
+            <span></span>
+          </label>
+          <a data-l10n-id="scan-enable">Enable Scanner</a>
+          <small data-l10n-id="scan-enable-desc">Add items by scanning them</small>
+        </li>
+      </ul>
+    <header>
+      <h2 data-l10n-id="sharing">Sharing</h2>
+    </header>
+      <ul>
+        <li>
+          <label>
+            <input type="checkbox" data-type="checkbox" id="signature" />
+            <span></span>
+          </label>
+          <a data-l10n-id="signature">Add FoxShop signature</a>
+        </li>
+      </ul>
+    <header>
+      <h2 data-l10n-id="advanced">Advanced settings</h2>
+    </header>
+      <ul>
+        <li>
+          <button id="clear-data" data-l10n-id="clear-data">Reset FoxShop</button>
+        </li>
+      </ul>
+    <header>
+      <h2 data-l10n-id="about">About</h2>
+    </header>
+      <ul>
+        <li>
+          <button id="about" data-l10n-id="about">About</button>
+        </li>
+      </ul>
+    </section>
+
+
+    <form role="dialog" data-type="confirm" id="editCurrency" onsubmit="return false;" class="settings">
+      <section>
+      <h1 data-l10n-id="choose-currency">Edit currency</h1>
+      <p style="text-align: center">
+        <input type="text" id="userCurrency" data-l10n-id="user-currency" placeholder="Your currency">
+        <button type="reset">reset</button>
+      </p>
+      <br>
+      <h1 data-l10n-id="position">Position</h1>
+      <p >
+        <ul>
+          <li>
+            <label>
+              <input type="radio" id="positionLeft" name="position" value="left"/>
+              <span></span>
+            </label>
+            <a data-l10n-id="left">Left</a>
+          </li>
+          <li>
+            <label>
+              <input type="radio" id="positionRight" name="position" value="right"/>
+              <span></span>
+            </label>
+            <a data-l10n-id="right">Right</a>
+          </li>
+        </ul>
+      </p>
+      </section>
+      <menu>
+        <button id="cEditCurrency" class="cancel" data-l10n-id="cancel">Cancel</button>
+        <button id="setEditCurrency" class="recommend" data-l10n-id="set">Set</button>
+      </menu>
+    </form>
+
+
+    <form role="dialog" data-type="confirm" id="clearPrompt" onsubmit="return false;">
+    <section>
+      <h1 data-l10n-id="confirmation">Confirmation</h1>
+      <p>
+        <span data-l10n-id="clear-data-desc">Resetting FoxShop will clear all your data, including lists, items and settings. Are you sure you want to reset FoxShop?</span>
+      </p>
+    </section>
+    <menu>
+      <button id="clearPromptCancel" class="cancel" data-l10n-id="cancel">Cancel</button>
+      <button id="clearPromptReset" role="button" class="danger" data-l10n-id="reset">Reset</button>
+    </menu>
+    </form>
+
+
+    <section role="region" class="skin-organic settings" id="aboutPanel">
+    <header>
+      <a href="#settingsPanel"><span id="aboutBack" class="icon icon-back">back</span></a>
+      <h1 data-l10n-id="about">About</h1>
+    </header>
+    <ul>
+      <li>
+        <span id="version" class="menu-item" >FoxShop</span>
+      </li>
+    </ul>
+    <header>
+      <h2 data-l10n-id="contact-us">Contact us</h2>
+    </header>
+    <ul>
+      <li>
+        <button id="contact-button" data-l10n-id="contact-button">Send us your feedback</button>
+      </li>
+    </ul>
+    <p data-l10n-id="about-desc-start" data-l10n-args='{"url":"http://theochevalier.fr"}'>
+    </p>
+    <p data-l10n-id="about-desc-end" data-l10n-args='{"contribute":"https://github.com/TheoChevalier/FoxShop", "localize":"http://beta.babelzilla.org/projects/p/FoxShop/"}'>
+    </p>
+    <p data-l10n-id="about-licence">
+    </p>
+    </section>
+
+    <section role="status" id="status"></section>
+  </div>
+  <script src="lazyload-min/lazyload-min.js"></script>
+  <script type="text/JavaScript">
+    LazyLoad.js([
+      'lib/IndexedDBShim/IndexedDBShim.min.js',
+      'js/db.js',
+      'js/sl.js',
+      'js/sl.settings.js',
+      'js/sl.lists.js',
+      'js/sl.editmode.js',
+      'js/sl.items.js',
+      'js/sl.itemview.js',
+      'js/sl.enteremail.js',
+      'js/events.js']);
+  </script>
+  </body>
+</html>

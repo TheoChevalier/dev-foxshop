@@ -1,0 +1,32 @@
+{
+  "version": "1.1.6.5",
+  "name": "FoxShop",
+  "description": "With FoxShop, you easily create, edit and share <b>multiple shopping lists</b> directly from your device, in your language.<br>FoxShop is <b>time-saving</b>, you can manage quantities and prices in your currency to optimize your purchases and add items by <b>scanning</b> them. It lets you always keep an eye on the total amount of your list!<br>Now, you don't have to keep everything in mind, and you can even <b>clone a list</b> to reuse it. Be organized, try FoxShop!",
+  "launch_path": "/FoxShop/index.html",
+  "fullscreen": "true",
+  "icons": {
+    "60": "/FoxShop/img/icons/60.png",
+    "128": "/FoxShop/img/icons/128.png"
+  },
+  "developer": {
+    "name": "Théo Chevalier",
+    "url": "http://theochevalier.fr"
+  },
+  "installs_allowed_from": ["*"],
+  "appcache_path": "/FoxShop/cache.appcache",
+  "locales": {
+    "fr": {
+      "description": "FoxShop vous permet de créer, modifier et partager en toute simplicité <b>plusieurs listes de courses</b>, directement depuis votre apareil, dans votre langue.<br>FoxShop vous fait <b>gagner du temps</b>, vous pouvez gérer les quantités prix des produits que vous pouvez ajouter en <b>scannant</b> directement leur code barre.<br>Vous n’avez plus à vous souvenir de tout, vous pouvez même <b>cloner une liste</b> pour la réutiliser. Soyez organisés, essayez FoxShop !"
+    },
+    "es": {
+      "description": "Con FoxShop, podrá crear, editar y compartir, <b>múltiples listas de compra</b> directamente desde el dispositivo. FoxShop <b>ahorra tiempo</b>, puede gestionar cantidades y precios en su moneda local para mejorar sus compras y agregar elementos mediante <b>escaneo</b>. Le permite tener siempre a la vista el importe de su compra. Ya no es necesario que lo recuerde todo, puede incluso <b>clonar las listas</b> para reutilizarlas. Sea organizado, ¡pruebe FoxShop!"
+    },
+    "pl": {
+      "description": "Za pomocą FoxShop możesz łatwo tworzyć, edytować i udostępniać <b>listy zakupów</b> bezpośrednio na Twoim urządzeniu i w Twoim języku.<br>FoxShop <b>oszczędza czas</b>, możesz zarządzać ilością i cenami i dodawać zakupy, <b>skanując</b> kod paskowy. Dzięki kontroli kosztów możesz zoptymalizować zakupy, widząc cały czas koszt zakupów.<br>Teraz nie musisz wszystkiego pamiętać, czy robić notatki na karteczce. Możesz także powielać listy, by użyć je ponownie. Bądź zorganizowany/zorganizowana, wypróbuj FoxShop!"
+    },
+    "pt-BR": {
+      "description": "Com o FoxShop, você facilmente cria, edita e compartilha <b>múltiplas listas de compras</b> diretamente do seu dispositivo, no seu idioma. Com o FoxShop você <b>economiza tempo</b>, você pode gerenciar quantidades e preços na sua moeda para otimizar suas compras e adicionar itens <b>digitalizando-os</b>. Ele permite que você sempre mantenha um olho sobre o valor total da sua lista! Agora, você não tem que manter tudo em mente, e você ainda pode <b>clonar uma lista</b> para reutilizá-la. Seja organizado, teste o FoxShop!"
+    }
+  },
+  "default_locale": "en"
+}
