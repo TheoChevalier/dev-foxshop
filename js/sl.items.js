@@ -207,8 +207,10 @@ SL.Items = {
     if (SL.Settings.obj["prices"].value) {
       $id("NIF-price").parentNode.removeAttribute("hidden");
     }
+    console.log("plop1");
     // Check if we can pick images
     if (MOZACTIVITY) {
+      console.log("plop2");
       // WIP — disabled
       SL.show("thumbnail-action");
     }
