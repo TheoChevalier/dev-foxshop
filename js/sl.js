@@ -11,7 +11,7 @@ var DB_STORE_LISTS = 'lists2';
 var DB_STORE_ITEMS = 'items1';
 var DB_STORE_SETTINGS = 'settings1';
 var db;
-var MOZACTIVITY = false;
+var MOZACTIVITY = true;
 var SCANNER = true;
 var SHARE = false;
 var DEFAULT_CONF = {language:{value:""},
