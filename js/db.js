@@ -63,6 +63,32 @@ var DB = {
     };
   },
 
+  storeBlob: function(blob, guid) {
+    var store = this.getObjectStore(DB_STORE_IMAGES, 'readwrite');
+    // Put the blob into the dabase
+    var put = store.put(blob, guid);
+  },
+
+  getBlob: function(guid, elm) {
+    var store = this.getObjectStore(DB_STORE_IMAGES, 'readwrite');
+    store.get(guid).onsuccess = function (event) {
+      var imgFile = event.target.result;
+      console.log("Got file!" + imgFile);
+
+      // Get window.URL object
+      var URL = window.URL || window.webkitURL;
+
+      // Create and revoke ObjectURL
+      var imgURL = URL.createObjectURL(imgFile);
+
+      // Set img src to ObjectURL
+      elm.setAttribute("src", imgURL);
+
+      // Revoking ObjectURL
+      URL.revokeObjectURL(imgURL);
+    };
+  },
+
   /**
    * @param {IDBObjectStore=} store
    */

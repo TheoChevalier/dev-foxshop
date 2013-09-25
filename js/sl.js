@@ -445,59 +445,79 @@ var SL = {
         if(-1 == code.indexOf('X')){ return code || false; }
     }
     return false;
-},
-redimImage: function(url, inId, inMW, inMH) {
-  // Cette function recoit 3 parametres
-  // inImg : Chemin relatif de l'image
-  // inMW  : Largeur maximale
-  // inMH   : Hauteur maximale
-  var maxWidth = inMW;
-  var maxHeight = inMH;
-  // Declarations des variables "Nouvelle Taille"
-  var dW = 0;
-  var dH = 0;
-  // Declaration d'un objet Image
-  var oImg = new Image();
-  // Affectation du chemin de l'image a l'objet
-  oImg.src = url;
-  oImg.onload = function () {
-      var oImg = this;
-      // On recupere les tailles reelles
-      var h = dH = oImg.height;
-      var w = dW = oImg.width;
-      // Si la largeur ou la hauteur depasse la taille maximale
-      if ((h >= maxHeight) || (w >= maxWidth)) {
-          // Si la largeur et la hauteur depasse la taille maximale
-          if ((h >= maxHeight) && (w >= maxWidth)) {
-              // On cherche la plus grande valeur
-              if (h > w) {
-                  dH = maxHeight;
-                  // On recalcule la taille proportionnellement
-                  dW = parseInt((w * dH) / h, 10);
-              } else {
-                  dW = maxWidth;
-                  // On recalcule la taille proportionnellement
-                  dH = parseInt((h * dW) / w, 10);
-              }
-          } else if ((h > maxHeight) && (w < maxWidth)) {
-              // Si la hauteur depasse la taille maximale
-              dH = maxHeight;
-              // On recalcule la taille proportionnellement
-              dW = parseInt((w * dH) / h, 10);
-          } else if ((h < maxHeight) && (w > maxWidth)) {
-              // Si la largeur depasse la taille maximale
-              dW = maxWidth;
-              // On recalcule la taille proportionnellement
-              dH = parseInt((h * dW) / w, 10);
-          }
-      }
-      // On ecrit l'image dans le document
-      var img = document.getElementById(inId);
-      img.src= url;
-      img.width=dW;
-      img.height=dH;
-  };
-},
+  },
+
+  redimImage: function(url, inId, inMW, inMH) {
+    // Cette function recoit 3 parametres
+    // inImg : Chemin relatif de l'image
+    // inMW  : Largeur maximale
+    // inMH   : Hauteur maximale
+    var maxWidth = inMW;
+    var maxHeight = inMH;
+    // Declarations des variables "Nouvelle Taille"
+    var dW = 0;
+    var dH = 0;
+    // Declaration d'un objet Image
+    var oImg = new Image();
+    // Affectation du chemin de l'image a l'objet
+    oImg.src = url;
+    oImg.onload = function () {
+        var oImg = this;
+        // On recupere les tailles reelles
+        var h = dH = oImg.height;
+        var w = dW = oImg.width;
+        // Si la largeur ou la hauteur depasse la taille maximale
+        if ((h >= maxHeight) || (w >= maxWidth)) {
+            // Si la largeur et la hauteur depasse la taille maximale
+            if ((h >= maxHeight) && (w >= maxWidth)) {
+                // On cherche la plus grande valeur
+                if (h > w) {
+                    dH = maxHeight;
+                    // On recalcule la taille proportionnellement
+                    dW = parseInt((w * dH) / h, 10);
+                } else {
+                    dW = maxWidth;
+                    // On recalcule la taille proportionnellement
+                    dH = parseInt((h * dW) / w, 10);
+                }
+            } else if ((h > maxHeight) && (w < maxWidth)) {
+                // Si la hauteur depasse la taille maximale
+                dH = maxHeight;
+                // On recalcule la taille proportionnellement
+                dW = parseInt((w * dH) / h, 10);
+            } else if ((h < maxHeight) && (w > maxWidth)) {
+                // Si la largeur depasse la taille maximale
+                dW = maxWidth;
+                // On recalcule la taille proportionnellement
+                dH = parseInt((h * dW) / w, 10);
+            }
+        }
+        // On ecrit l'image dans le document
+        var img = document.getElementById(inId);
+        img.src= url;
+        img.width=dW;
+        img.height=dH;
+    };
+  },
+
+  getBase64Image: function(img) {
+    // Create an empty canvas element
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Copy the image contents to the canvas
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Get the data-URL formatted image
+    // Firefox supports PNG and JPEG. You could check img.src to
+    // guess the original format, but be aware the using "image/jpg"
+    // will re-encode the image.
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  },
 
   //Unused for now
   class: function(target, n) {
