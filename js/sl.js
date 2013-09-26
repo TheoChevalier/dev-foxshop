@@ -34,6 +34,14 @@ var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction
 // Alias for getElementById
 var $id = document.getElementById.bind(document);
 
+
+// Lock screen orientation
+try {
+  window.screen.mozLockOrientation("portrait-primary");
+  alert(window.screen.mozLockOrientation("portrait-primary"));
+} catch(e){}
+
+
 // Define manifest URL
 if (location.host === "localhost") {
   var MANIFEST = "http://localhost/FoxShop/manifest.webapp";
@@ -110,6 +118,7 @@ var SL = {
     var newToggle = document.createElement('label');
     var mySpan = document.createElement('span');
     var checkbox = document.createElement('input');
+    newToggle.className = "pack-checkbox";
     checkbox.setAttribute('type', 'checkbox');
     if (aList.done) {
       newLi.className = "done";
