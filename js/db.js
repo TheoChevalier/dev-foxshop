@@ -27,7 +27,7 @@ var DB = {
       };
     }
   }*/
-  }:
+  };
   // For future use. Currently only in latest Firefox versions
   request.onupgradeneeded = function (event) {
     if (event.oldVersion === 0) {
