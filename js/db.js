@@ -26,8 +26,8 @@ var DB = {
         DB.createObjectStore(db);
       };
     }
-  }
   }*/
+  }:
   // For future use. Currently only in latest Firefox versions
   request.onupgradeneeded = function (event) {
     if (event.oldVersion === 0) {
