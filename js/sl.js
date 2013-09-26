@@ -6,12 +6,13 @@
 
 // DB init
 var DB_NAME = 'ShoppingList';
-var DB_VERSION = 3; // Use a long long for this value (don't use a float)
+var DB_VERSION = 4; // Use a long long for this value (don't use a float)
 var DB_STORE_LISTS = 'lists2';
 var DB_STORE_ITEMS = 'items1';
+var DB_STORE_IMAGES = 'images1';
 var DB_STORE_SETTINGS = 'settings1';
 var db;
-var MOZACTIVITY = true;
+var MOZACTIVITY = false;
 var SCANNER = true;
 var SHARE = false;
 var DEFAULT_CONF = {language:{value:""},
@@ -22,6 +23,13 @@ var DEFAULT_CONF = {language:{value:""},
                     currencyPosition:{value:""}
                    };
 var EMAIL = "foxshop@theochevalier.fr";
+
+ // IndexedDB
+var indexedDB = window.indexedDB || window.webkitIndexedDB
+                || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
+
+var IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction
+                     || window.OIDBTransaction || window.msIDBTransaction;
 
 // Alias for getElementById
 var $id = document.getElementById.bind(document);
@@ -48,7 +56,7 @@ window.applicationCache.addEventListener('updateready', function(e) {
 var appCache = window.applicationCache;
   if (appCache) {
     appCache.onupdateready = function () {
-      if (window.confirm("update-ready: Apply update now?")) {
+      if (window.confirm(_("update-ready"))) {
         location.reload(true);
       }
     };
@@ -136,7 +144,11 @@ var SL = {
 
     // Part 2 pack-end
     var packEnd  = document.createElement('aside');
+    var packEndImg  = document.createElement('img');
     packEnd.className = "pack-end";
+    packEndImg.src="";
+    packEnd.appendChild(packEndImg);
+
 
     // part 3 title
     var newTitle = document.createElement('a');
@@ -457,6 +469,12 @@ var SL = {
     // Declarations des variables "Nouvelle Taille"
     var dW = 0;
     var dH = 0;
+    // Create context
+    var canvas = $id("canvas");
+    var ctx = canvas.getContext("2d");
+    canvas.width = 100;
+    canvas.height = 100;
+
     // Declaration d'un objet Image
     var oImg = new Image();
     // Affectation du chemin de l'image a l'objet
@@ -492,11 +510,10 @@ var SL = {
                 dH = parseInt((h * dW) / w, 10);
             }
         }
+        ctx.drawImage(oImg, 0, 0, dW, dH);
         // On ecrit l'image dans le document
         var img = document.getElementById(inId);
-        img.src= url;
-        img.width=dW;
-        img.height=dH;
+        img.src = $id("canvas").toDataURL("image/png");
     };
   },
 
@@ -517,6 +534,30 @@ var SL = {
     var dataURL = canvas.toDataURL("image/png");
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  },
+
+  dataURLToBlob: function(dataURL) {
+    var BASE64_MARKER = ';base64,';
+    if (dataURL.indexOf(BASE64_MARKER) == -1) {
+      var parts = dataURL.split(',');
+      var contentType = parts[0].split(':')[1];
+      var raw = parts[1];
+
+      return new Blob([raw], {type: contentType});
+    }
+
+    var parts = dataURL.split(BASE64_MARKER);
+    var contentType = parts[0].split(':')[1];
+    var raw = window.atob(parts[1]);
+    var rawLength = raw.length;
+
+    var uInt8Array = new Uint8Array(rawLength);
+
+    for (var i = 0; i < rawLength; ++i) {
+      uInt8Array[i] = raw.charCodeAt(i);
+    }
+
+    return new Blob([uInt8Array], {type: contentType});
   },
 
   //Unused for now

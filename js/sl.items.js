@@ -87,6 +87,7 @@ SL.Items = {
         SL.display(item, this);
         if (this.elm.querySelector('li[data-listkey="'+item.guid+'"]') !== null) {
           var node = this.elm.querySelector('li[data-listkey="'+item.guid+'"]');
+          var img = node.getElementsByTagName("img")[0];
 
           // Name (first p)
           node = node.getElementsByTagName("p");
@@ -116,6 +117,14 @@ SL.Items = {
           // p2 > a3: note
           if (typeof item.note !== "undefined") {
             node[2].textContent = item.note;
+          }
+
+
+          // Picture
+          if (item.image !== "" && typeof item.image !== "undefined") {
+            img.src = item.image;
+          } else {
+            DB.setBlob(item.guid, img);
           }
         }
       }
@@ -193,6 +202,8 @@ SL.Items = {
     // Reset view
     SL.newItemForm.elm.getElementsByClassName("title")[0].textContent=_("NIF-title");
     SL.hide("NIF-delete");
+    SL.show("thumbnail-action");
+    $id("NIF-photo").src ="";
 
     // Reset form
     $id("NIF-category-button").textContent = _("NIF-category-button");
@@ -207,13 +218,7 @@ SL.Items = {
     if (SL.Settings.obj["prices"].value) {
       $id("NIF-price").parentNode.removeAttribute("hidden");
     }
-    console.log("plop1");
-    // Check if we can pick images
-    if (MOZACTIVITY) {
-      console.log("plop2");
-      // WIP — disabled
-      SL.show("thumbnail-action");
-    }
+
   },
   doneNIF: function() {
     var price = "";
@@ -247,6 +252,12 @@ SL.Items = {
       qty = 1;
     }
 
+    // If the user selected a picture, save it
+    if ($id("NIF-photo").src != "")
+      var image = $id("NIF-photo").src;
+    else
+      var image = false;
+
     var aItem = { guid: SL.guid(),
                   name: name,
                   list: this.guid,
@@ -256,6 +267,7 @@ SL.Items = {
                   unit: unit,
                   note: note,
                   date: date.getTime(),
+                  image: image,
                   done: false
     };
 
@@ -267,6 +279,7 @@ SL.Items = {
     this.updateUI();
 
     DB.store(aItem, this);
+    DB.storeBlob(aItem.guid, aItem.image);
 
     // Reset forms
     $id('NIF-container').reset();
